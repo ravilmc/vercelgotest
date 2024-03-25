@@ -1,10 +1,10 @@
-package handler
+package api
 
 import (
 	"fmt"
 	"net/http"
 )
-// 
+
 func NewRouter() *http.ServeMux {
 	router := http.NewServeMux()
 
@@ -23,6 +23,5 @@ func NewRouter() *http.ServeMux {
 }
 
 func Handler(w http.ResponseWriter, r *http.Request) {
-	router := NewRouter()
-	router.ServeHTTP(w, r)
+	fmt.Fprintf(w, "Hello World")
 }
