@@ -23,5 +23,6 @@ func NewRouter() *http.ServeMux {
 }
 
 func Handler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hello World")
+	router := NewRouter()
+	router.ServeHTTP(w, r)
 }
