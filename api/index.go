@@ -8,14 +8,14 @@ import (
 func NewRouter() *http.ServeMux {
 	router := http.NewServeMux()
 
-	router.HandleFunc("GET /api", func(w http.ResponseWriter, r *http.Request) {
+	router.HandleFunc("GET /", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "Hello World")
 	})
-	router.HandleFunc("POST /api", func(w http.ResponseWriter, r *http.Request) {
+	router.HandleFunc("POST /", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "Hello World post")
 	})
 
-	router.HandleFunc("GET /api/{version}/", func(w http.ResponseWriter, r *http.Request) {
+	router.HandleFunc("GET /{version}/", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "API Version: %s", r.PathValue("version"))
 	})
 
@@ -23,6 +23,9 @@ func NewRouter() *http.ServeMux {
 }
 
 func Handler(w http.ResponseWriter, r *http.Request) {
-	router := NewRouter()
-	router.ServeHTTP(w, r)
+	api := http.NewServeMux()
+
+	api.Handle("/api/", http.StripPrefix("/api", NewRouter()))
+
+	api.ServeHTTP(w, r)
 }
