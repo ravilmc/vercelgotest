@@ -8,10 +8,10 @@ import (
 func NewRouter() *http.ServeMux {
 	router := http.NewServeMux()
 
-	router.HandleFunc("GET /", func(w http.ResponseWriter, r *http.Request) {
+	router.HandleFunc("GET /api", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "Hello World")
 	})
-	router.HandleFunc("POST /", func(w http.ResponseWriter, r *http.Request) {
+	router.HandleFunc("POST /api", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "Hello World post")
 	})
 
